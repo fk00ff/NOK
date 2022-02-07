@@ -84,4 +84,5 @@ func main() {
 	d2, _ := strconv.Atoi(os.Args[2])
 
 	fmt.Print(nok(d1, d2))
+	//
 }
