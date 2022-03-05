@@ -33,7 +33,7 @@ func GetSimple() []int {
 	for counter < 100 {
 
 		for j := 0; j < counter; j = j + 1 {
-			if num/result[j] == 0 {
+			if num%result[j] == 0 {
 				goto next
 			}
 		}
@@ -49,7 +49,30 @@ func GetSimple() []int {
 }
 
 func Divide(num int, simple []int) map[int]int {
-	return nil
+
+	result := make(map[int]int)
+
+	for _, smpl := range simple {
+
+		for {
+			if num < smpl {
+				goto fin
+			}
+
+			if num%smpl == 0 {
+				result[smpl] = result[smpl] + 1
+				num = num / smpl
+			} else {
+				break
+			}
+
+		}
+
+	}
+
+fin:
+
+	return result
 }
 
 func nok(div1, div2 int) int {
@@ -73,8 +96,6 @@ func nok(div1, div2 int) int {
 }
 
 func main() {
-	fmt.Print("test")
-
 	if len(os.Args) < 3 {
 		fmt.Println("Need TWO args")
 		os.Exit(2)
