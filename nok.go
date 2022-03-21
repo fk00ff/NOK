@@ -32,7 +32,6 @@ func GetSimple() []int {
 	counter := 1
 
 	for counter < 100 {
-
 		for j := 0; j < counter; j = j + 1 {
 			if num%result[j] == 0 {
 				goto next
@@ -50,11 +49,9 @@ func GetSimple() []int {
 }
 
 func Divide(num int, simple []int) map[int]int {
-
 	result := make(map[int]int)
 
 	for _, smpl := range simple {
-
 		for {
 			if num < smpl {
 				goto fin
@@ -66,13 +63,10 @@ func Divide(num int, simple []int) map[int]int {
 			} else {
 				break
 			}
-
 		}
-
 	}
 
 fin:
-
 	return result
 }
 
