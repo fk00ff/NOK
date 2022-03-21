@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 )
 
 // Min returns the smaller of x or y.
-func Min(x, y int) int {
+func min(x, y int) int {
 	if x > y {
 		return y
 	}
@@ -15,7 +16,7 @@ func Min(x, y int) int {
 }
 
 // Max returns the larger of x or y.
-func Max(x, y int) int {
+func max(x, y int) int {
 	if x < y {
 		return y
 	}
@@ -75,23 +76,37 @@ fin:
 	return result
 }
 
+func powInt(x, y int) int {
+	return int(math.Pow(float64(x), float64(y)))
+}
+
 func nok(div1, div2 int) int {
-	div_min := Min(div1, div2)
-	div_max := Max(div1, div2)
+	div_min := min(div1, div2)
+	div_max := max(div1, div2)
 
 	fmt.Println(div_min, div_max)
 
 	simple := GetSimple()
 	d_min := Divide(div_min, simple)
-	// d_max:=Divide(div_max, simple)
+	d_max := Divide(div_max, simple)
 
 	for num, cnt := range d_min {
-		if d_min[num] != 0 {
-			d_min[num] = cnt + 1
+		if d_max[num] != 0 {
+			d_max[num] = d_max[num] - min(d_max[num], cnt)
 		}
 	}
 
-	return 1
+	result := 1
+
+	for num, cnt := range d_min {
+		result = result * powInt(num, cnt)
+	}
+
+	for num, cnt := range d_max {
+		result = result * powInt(num, cnt)
+	}
+
+	return result
 
 }
 
@@ -105,5 +120,4 @@ func main() {
 	d2, _ := strconv.Atoi(os.Args[2])
 
 	fmt.Print(nok(d1, d2))
-	//
 }
